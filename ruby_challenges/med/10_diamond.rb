@@ -1,38 +1,39 @@
 class Diamond
   def self.make_diamond(letter)
-    range = ('A'..letter).to_a + ('A'...letter).to_a.reverse
-    diamond_width = max_width(letter)
+    result = []
+    letters = ('A'...letter).to_a + ('A'..letter).to_a.reverse
 
-    range.each_with_object([]) do |let, arr|
-      arr << make_row(let).center(diamond_width)
-    end.join("\n") + "\n"
+    letters.each do |let|
+      result << rows(let).center(max_width(letter))
+    end
+
+    result.join("\n") + "\n"
   end
 
-  private
-
-  def self.make_row(letter)
+  def self.rows(letter)
     return "A" if letter == 'A'
     return "B B" if letter == 'B'
 
-    letter + determine_spaces(letter) + letter
+    letter + calc_width(letter) + letter
+
   end
 
-  def self.determine_spaces(letter)
+  def self.calc_width(letter)
     all_letters = ['B']
-    spaces = 1
+    space = 1
 
     until all_letters.include?(letter)
-      current_letter = all_letters.last
+      current_letter = all_letters[-1]
       all_letters << current_letter.next
-      spaces += 2
+      space += 2
     end
 
-    ' ' * spaces
+    ' ' * space
   end
 
   def self.max_width(letter)
     return 1 if letter == 'A'
 
-    determine_spaces(letter).count(' ') + 2
+    calc_width(letter).count(' ') + 2
   end
 end

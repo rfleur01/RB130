@@ -1,20 +1,21 @@
 class SumOfMultiples
-  def initialize(*set)
-    @set = set
+  attr_reader :numbers
+
+  def initialize(*numbers)
+    @numbers = numbers
   end
 
-  def to(number)
-    multiples = []
-
-    @set.each do |num|
-      1.upto(number - 1) { |n| multiples << n if n % num == 0 && !multiples.include?(n) }
+  def to(limit)
+    sum = 0
+    1.upto(limit - 1).each do |num|
+      sum += num if numbers.any? { |n| num % n == 0 }
     end
 
-    return 0 if multiples.empty?
-    multiples.reduce(:+)
+    sum
   end
 
-  def self.to(number)
-    SumOfMultiples.new(3, 5).to(number)
+  def self.to(limit)
+    SumOfMultiples.new(3,5).to(limit)
   end
+
 end

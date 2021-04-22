@@ -22,7 +22,6 @@ class AnagramTest < Minitest::Test
   end
 
   def test_does_not_confuse_different_duplicates
-
     detector = Anagram.new('galea')
     assert_equal [], detector.match(['eagle'])
   end

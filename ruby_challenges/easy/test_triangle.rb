@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative 'triangles'
+require_relative 'triangle'
 
 class TriangleTest < Minitest::Test
   def test_equilateral_equal_sides
@@ -33,6 +33,7 @@ class TriangleTest < Minitest::Test
   end
 
   def test_scalene_no_equal_sides
+
     triangle = Triangle.new(3, 4, 5)
     assert_equal 'scalene', triangle.kind
   end
@@ -79,6 +80,12 @@ class TriangleTest < Minitest::Test
   def test_size_inequality_is_illegal_3
     assert_raises(ArgumentError) do
       triangle = Triangle.new(10, 1, 3)
+    end
+  end
+
+  def test_size_inequality_is_illegal_4
+    assert_raises(ArgumentError) do
+      triangle = Triangle.new(1, 1, 2)
     end
   end
 end

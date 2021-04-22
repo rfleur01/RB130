@@ -1,14 +1,19 @@
 class Octal
-  def initialize(string)
-    @string = string.chars.all? { |n| n =~ /[0-7]/ } ? string : "0"
+attr_reader :number
+
+  def initialize(number)
+    @number = number
   end
 
   def to_decimal
-    octal = []
+    return 0 if number.chars.any?(/[^0-7]|[A-Za-z]/)
 
-    @string.chars.reverse.each_with_index { |str, index| octal << str.to_i * (8**index) }
+    sum = 0
+    number.to_i.digits.each_with_index do |num, index|
+      sum += num * (8**index)
+    end
 
-    octal.reduce(:+)
+    sum
   end
 end
 

@@ -1,24 +1,23 @@
 class Triangle
-  attr_accessor :sides
   def initialize(side1, side2, side3)
     @sides = [side1, side2, side3]
-    raise ArguementError.new "Side lengths must be greater than zero!" unless valid?
-  end
-
-  def valid?
-    sides.min > 0 &&
-    sides[0] + sides[1] >= sides[2] &&
-    sides[1] + sides[2] >= sides[0] &&
-    sides[0] + sides[2] >= sides[1]
+    raise ArgumentError.new "Invalid triangle lengths" unless valid?
   end
 
   def kind
-    if sides.uniq.size == 1
-      'equilateral'
-    elsif sides.uniq.size == 2
-      'isosceles'
+    if @sides.uniq.size == 1
+      "equilateral"
+    elsif @sides.uniq.size == 2
+      "isosceles"
     else
-      'scalene'
+      "scalene"
     end
+  end
+
+  private
+
+  def valid?
+    @sides.all? { |side| side > 0 } &&
+    @sides.min(2).reduce(:+) > @sides.max
   end
 end

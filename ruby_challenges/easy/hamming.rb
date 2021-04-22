@@ -6,13 +6,13 @@ class DNA
   end
 
   def hamming_distance(other_strand)
-    shorter = strand.size < other_strand.size ? strand : other_strand
-    counter = 0
+    distance = 0
+    shorter_strand = strand.size < other_strand.size ? strand : other_strand
 
-    shorter.length.times do |index|
-      counter += 1 unless strand[index] == other_strand[index]
+    shorter_strand.size.times do |index|
+      distance += 1 if strand[index] != other_strand[index]
     end
 
-   counter
+    distance
   end
 end

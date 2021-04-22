@@ -3,7 +3,7 @@ class Robot
 
   def name
     return @name if @name
-    @name = generate_name while @@names.include?(@name) || @name.nil?
+    @name =  generate_name while @@names.include?(@name) || @name.nil?
     @@names << @name
     @name
   end
@@ -17,8 +17,8 @@ class Robot
 
   def generate_name
     name = ''
-    2.times { name << rand(65..90).chr }
-    3.times { name << rand(0..9).to_s }
+    2.times { name << ('A'..'Z').to_a.sample }
+    3.times { name << ('0'..'9').to_a.sample }
     name
   end
 end

@@ -1,7 +1,7 @@
 class RomanNumeral
   attr_accessor :number
 
-  ROMAN_NUMERALS = {
+  NUMERALS = {
     "M" => 1000,
     "CM" => 900,
     "D" => 500,
@@ -22,16 +22,20 @@ class RomanNumeral
   end
 
   def to_roman
-    roman_version = ''
+    numeral = ''
     to_convert = number
-
-    ROMAN_NUMERALS.each do |key, value|
+    NUMERALS.each do |key, value|
       multiplier, remainder = to_convert.divmod(value)
       if multiplier > 0
-        roman_version += (key * multiplier)
+        numeral += key * multiplier
       end
       to_convert = remainder
     end
-    roman_version
+
+    numeral
+  end
+
+  def self.to_roman
+
   end
 end
